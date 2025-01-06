@@ -8,7 +8,8 @@ export async function generateStaticParams() {
 
 export default async function ItemPage({ params }) {
   const { id } = await params
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+  const baseUrl = 
+    process.env.NODE_ENV === "production" ? "https://shticker.vercel.app" : "http://localhost:3000"
   const response = await fetch(`${baseUrl}/api/tees`)
   const data = await response.json()
 
