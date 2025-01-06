@@ -11,8 +11,12 @@ const ItemGrid = () => {
 
   useEffect(() => {
     const fetchItems = async () => {
+      const baseUrl =
+        process.env.NODE_ENV === "production"
+          ? "https://shticker.vercel.app"
+          : "http://localhost:3000"
       try {
-        const response = await fetch("/api/tees")
+        const response = await fetch(`${baseUrl}/api/tees`)
         if (!response.ok) throw new Error("Failed to fetch items")
         const data = await response.json()
         setItems(data)
